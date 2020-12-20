@@ -1,0 +1,88 @@
+﻿<Window
+    x:Class="DiApp.UI.Product.ProductWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:DiApp.UI.Product"
+    Title="ProductWindow"
+    Width="800"
+    Height="450"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <DataTemplate x:Key="ProductDataTemplate" DataType="{x:Type model:Product}">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Label
+                        Width="100"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        Content="{Binding Path=ProductId, Mode=OneWay}" />
+
+                    <Label
+                        Width="auto"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        Content="{Binding Path=Barcode, Mode=OneWay}" />
+
+                    <Label
+                        Width="auto"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        Content="{Binding Path=Name, Mode=OneWay}" />
+
+                    <Label
+                        Width="auto"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        Content="{Binding Path=Description, Mode=OneWay}" />
+
+                    <Label
+                        Width="auto"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        Content="{Binding Path=Price, Mode=OneWay}" />
+
+                    <Label
+                        Width="auto"
+                        VerticalAlignment="Center"
+                        HorizontalContentAlignment="Stretch"
+                        Content="{Binding Path=Source, Mode=OneWay}" />
+
+                    <StackPanel
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Width="auto"
+                            VerticalAlignment="Center"
+                            Command="{Binding ElementName=ProductListBox, Path=DataContext.OnProductDetailCommand}"
+                            CommandParameter="{Binding}"
+                            Content="Detay"
+                            Style="{StaticResource ButtonListBoxStyle}" />
+                    </StackPanel>
+                </StackPanel>
+                <Separator>
+                    <Separator.Background>
+                        <SolidColorBrush Opacity="0.03" Color="#FF0F0F0F" />
+                    </Separator.Background>
+                </Separator>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+
+        <ListBox
+            Name="ProductListBox"
+            HorizontalContentAlignment="Stretch"
+            Background="Transparent"
+            BorderThickness="0"
+            ItemTemplate="{StaticResource ProductDataTemplate}"
+            ItemsSource="{Binding Products}"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden" />
+
+    </Grid>
+</Window>
